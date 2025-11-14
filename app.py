@@ -120,19 +120,14 @@ with st.sidebar:
         # Image info
         st.info(f"**Size:** {pil_image.size[0]} x {pil_image.size[1]}\n\n**Format:** {pil_image.format}")
 
-        # Clear chat button
-        if st.button("🗑️ Clear Chat History", use_container_width=True):
+        # Clear history and start new session button
+        st.markdown("---")
+        if st.button("🗑️ Clear History", use_container_width=True):
+            st.session_state.session_id = f"image_session_{uuid.uuid4().hex[:8]}"
             st.session_state.messages = []
             st.rerun()
     else:
         st.info("👆 Please upload an image to get started")
-
-    # Reset session button
-    st.markdown("---")
-    if st.button("🔄 Start New Conversation", use_container_width=True):
-        st.session_state.session_id = f"image_session_{uuid.uuid4().hex[:8]}"
-        st.session_state.messages = []
-        st.rerun()
 
 # Main chat interface
 if st.session_state.uploaded_image_bytes is not None:
