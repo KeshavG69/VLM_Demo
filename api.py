@@ -288,6 +288,14 @@ async def health():
         "mongodb_connected": get_mongodb_instance() is not None
     }
 
+@app.get("/")
+async def health():
+    """Health check endpoint"""
+    return {
+        "status": "Eveything Working Fine",
+    }
+
+
 
 if __name__ == "__main__":
     import uvicorn
